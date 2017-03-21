@@ -1,4 +1,4 @@
-package com.valentin.blog;
+package com.valentin.blog.exceptions;
 
 public class CannotSaveArticleException extends RuntimeException {
 }

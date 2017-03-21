@@ -1,4 +1,4 @@
-package com.valentin.blog;
+package com.valentin.blog.dtos;
 
 public class ArticleDTO {
     private long id;

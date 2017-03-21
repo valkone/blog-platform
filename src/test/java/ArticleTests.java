@@ -1,14 +1,18 @@
-import com.valentin.blog.*;
+import com.valentin.blog.dtos.ArticleDTO;
+import com.valentin.blog.exceptions.CannotSaveArticleException;
+import com.valentin.blog.models.Article;
+import com.valentin.blog.services.interfaces.ArticleService;
+import com.valentin.blog.services.ArticleServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
-import java.util.stream.Collector;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ArticleTests {
 
@@ -66,9 +70,8 @@ public class ArticleTests {
         articleService.save(testArticles);
 
         List<ArticleDTO> foundArticles = articleService.getAll();
-        for(Article testArticle : testArticles) {
+        for(Article testArticle : testArticles)
             assertTrue(articleFoundInArticleDtoList(testArticle, foundArticles));
-        }
     }
 
     @Test
@@ -78,14 +81,15 @@ public class ArticleTests {
         articleService.save(savedTestArticles);
 
         List<ArticleDTO> foundArticles = articleService.getAll();
-        for(Article testArticle : notSavedTestArticles) {
+        for(Article testArticle : notSavedTestArticles)
             assertFalse(articleFoundInArticleDtoList(testArticle, foundArticles));
-        }
     }
 
     private boolean articleFoundInArticleDtoList(Article article, List<ArticleDTO> list) {
-        return list.stream()
-                .filter(l -> l.getId() == article.getId()).collect(Collectors.toList()).size() > 0;
+        return list
+                .stream()
+                .filter(l -> l.getId() == article.getId())
+                .collect(Collectors.toList()).size() > 0;
     }
 
     private List<Article> getListOfTestArticles(int articlesCount) {

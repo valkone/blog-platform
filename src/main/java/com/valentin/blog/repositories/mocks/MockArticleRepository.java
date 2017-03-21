@@ -1,10 +1,14 @@
-package com.valentin.blog;
+package com.valentin.blog.repositories.mocks;
+
+import com.valentin.blog.exceptions.CannotSaveArticleException;
+import com.valentin.blog.models.Article;
+import com.valentin.blog.repositories.interfaces.ArticleRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockRepository implements Repository {
+public class MockArticleRepository implements ArticleRepository {
     private List<Article> articles = new ArrayList<>();
 
     public void save(Article article) {

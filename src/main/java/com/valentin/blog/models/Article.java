@@ -1,4 +1,4 @@
-package com.valentin.blog;
+package com.valentin.blog.models;
 
 import java.util.Date;
 
