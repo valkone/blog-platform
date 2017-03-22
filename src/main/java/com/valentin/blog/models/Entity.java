@@ -1,6 +1,6 @@
-package com.valentin.blog.dtos;
+package com.valentin.blog.models;
 
-public class ArticleDTO {
+public class Entity {
     private long id;
 
     public long getId() {
