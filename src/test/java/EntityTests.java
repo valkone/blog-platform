@@ -39,20 +39,20 @@ public class EntityTests {
     @Test
     public void saveEntity_shouldBeFound() {
         entityService.save(entity);
-        EntityDTO foundEntity = entityService.findById(entity.getId());
+        Entity foundEntity = entityService.findById(entity.getId());
         assertEquals(entity.getId(), foundEntity.getId());
     }
 
     @Test
     // TODO: should the service return null if the entity is not found?
     public void findEntitiesWithInvalidId_shouldReturnNull() {
-        EntityDTO entity = entityService.findById(234234);
+        Entity entity = entityService.findById(234234);
         assertEquals(null, entity);
     }
 
     @Test
     public void getAllEntitiesWithoutAdding_shouldReturnEmptyList() {
-        List<EntityDTO> entities = entityService.getAll();
+        List<Entity> entities = entityService.getAll();
         assertEquals(0, entities.size());
     }
 
@@ -62,7 +62,7 @@ public class EntityTests {
         List<Entity> testEntities = getListOfTestEntities(entitiesCount);
         entityService.save(testEntities);
 
-        List<EntityDTO> foundEntities = entityService.getAll();
+        List<Entity> foundEntities = entityService.getAll();
         assertEquals(entitiesCount, foundEntities.size());
     }
 
@@ -71,7 +71,7 @@ public class EntityTests {
         List<Entity> testEntities = getListOfTestEntities(4);
         entityService.save(testEntities);
 
-        List<EntityDTO> foundEntities = entityService.getAll();
+        List<Entity> foundEntities = entityService.getAll();
         for(Entity testEntity : testEntities)
             assertTrue(entityFoundInDtoList(testEntity, foundEntities));
     }
@@ -82,12 +82,12 @@ public class EntityTests {
         List<Entity> notSavedTestEntities = getListOfTestEntities(4);
         entityService.save(savedTestEntities);
 
-        List<EntityDTO> foundEntities = entityService.getAll();
+        List<Entity> foundEntities = entityService.getAll();
         for(Entity testEntities : notSavedTestEntities)
             assertFalse(entityFoundInDtoList(testEntities, foundEntities));
     }
 
-    private boolean entityFoundInDtoList(Entity entity, List<EntityDTO> list) {
+    private boolean entityFoundInDtoList(Entity entity, List<Entity> list) {
         return list
                 .stream()
                 .filter(l -> l.getId() == entity.getId())

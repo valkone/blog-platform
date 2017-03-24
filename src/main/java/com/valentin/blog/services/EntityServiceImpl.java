@@ -26,13 +26,13 @@ public class EntityServiceImpl implements EntityService {
             save(entity);
     }
 
-    public EntityDTO findById(long id) {
-        Entity entity = repository.findById(id);
-        return Mapper.entityToDto(entity);
+    @Override
+    public Entity findById(long id) {
+        return repository.findById(id);
     }
 
     @Override
-    public List<EntityDTO> getAll() {
-        return Mapper.entitiesToDto(repository.getAll());
+    public List<Entity> getAll() {
+        return repository.getAll();
     }
 }
