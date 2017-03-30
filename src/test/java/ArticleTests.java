@@ -1,9 +1,9 @@
 import com.valentin.blog.dtos.ArticleDTO;
 import com.valentin.blog.models.Article;
 import com.valentin.blog.models.Category;
+import com.valentin.blog.repositories.mocks.MockArticleRepository;
 import com.valentin.blog.repositories.mocks.MockEntityRepository;
-import com.valentin.blog.services.ArticleServiceImpl;
-import com.valentin.blog.services.interfaces.ArticleService;
+import com.valentin.blog.services.ArticleService;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class ArticleTests {
 
-    private ArticleService articleService = new ArticleServiceImpl(new MockEntityRepository());
+    private ArticleService articleService = new ArticleService(new MockArticleRepository());
 
     @Test
     public void getArticleByCategory_shouldReturnCorrectArticle() {

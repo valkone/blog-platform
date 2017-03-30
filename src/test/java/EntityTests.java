@@ -1,9 +1,7 @@
-import com.valentin.blog.dtos.EntityDTO;
 import com.valentin.blog.exceptions.CannotSaveEntityException;
 import com.valentin.blog.models.Entity;
 import com.valentin.blog.repositories.mocks.MockEntityRepository;
-import com.valentin.blog.services.EntityServiceImpl;
-import com.valentin.blog.services.interfaces.EntityService;
+import com.valentin.blog.services.EntityService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +20,7 @@ public class EntityTests {
     @Before
     public void setUp() {
         // TODO: should this be outside?
-        entityService = new EntityServiceImpl(new MockEntityRepository());
+        entityService = new EntityService(new MockEntityRepository());
         entity = createTestEntity();
     }
 
