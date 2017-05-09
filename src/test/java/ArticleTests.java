@@ -7,6 +7,7 @@ import com.valentin.blog.services.ArticleService;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,20 +17,25 @@ public class ArticleTests {
 
     @Test
     public void getArticleByCategory_shouldReturnCorrectArticle() {
-        Article article = getTestArticle();
-        Category c = new Category();
-        c.setId(UUID.randomUUID().getLeastSignificantBits());
-        c.setText("category");
-        article.setCategory(c);
+        Category category = getTestCategory();
+        Article article = getTestArticle()
+                .setCategory(category);
         articleService.save(article);
 
-        List<ArticleDTO> foundArticle = articleService.findByCategory(c.getText());
+        List<ArticleDTO> foundArticle = articleService.findByCategory(category.getText());
+        Assert.assertFalse(foundArticle.isEmpty());
         Assert.assertEquals(article.getId(), foundArticle.get(0).getId());
     }
 
+    private Category getTestCategory() {
+        return new Category()
+                .setId(UUID.randomUUID().getLeastSignificantBits())
+                .setText("category");
+    }
+
     private Article getTestArticle() {
-        Article article = new Article();
-        article.setId(UUID.randomUUID().getLeastSignificantBits());
-        return article;
+        return new Article()
+                .setData(new Date())
+                .setId(1);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EntityService {
 
-    private EntityRepository repository;
+    private EntityRepository<Entity> repository;
 
     public EntityService(EntityRepository repository) {
         this.repository = repository;

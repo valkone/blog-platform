@@ -8,25 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockEntityRepository implements EntityRepository {
+public class MockEntityRepository<T extends Entity> implements EntityRepository<T> {
 
-    private List<Entity> entities = new ArrayList<>();
+    private List<T> entities = new ArrayList<>();
 
     @Override
-    public void save(Entity entity) {
+    public void save(T entity) {
         if(entity == null)
             throw new CannotSaveEntityException();
         entities.add(entity);
     }
 
     @Override
-    public Entity findById(long id) {
-        List<Entity> foundEntities = entities.stream().filter(a -> a.getId() == id).collect(Collectors.toList());
+    public T findById(long id) {
+        List<T> foundEntities = entities.stream()
+                .filter(a -> a.getId() == id)
+                .collect(Collectors.toList());
         return foundEntities.size() > 0 ? foundEntities.get(0) : null;
     }
 
     @Override
-    public List<Entity> getAll() {
+    public List<T> getAll() {
         return entities;
     }
 }

@@ -7,7 +7,8 @@ public class Entity {
         return id;
     }
 
-    public void setId(long id) {
+    public Object setId(long id) {
         this.id = id;
+        return this;
     }
 }

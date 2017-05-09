@@ -9,9 +9,9 @@ import com.valentin.blog.utils.Mapper;
 import java.util.List;
 
 public class ArticleService extends EntityService {
-    private ArticleRepository repository;
+    private ArticleRepository<Article> repository;
 
-    public ArticleService(ArticleRepository repository) {
+    public ArticleService(ArticleRepository<Article> repository) {
         super(repository);
         this.repository = repository;
     }
@@ -26,8 +26,7 @@ public class ArticleService extends EntityService {
 
     @Override
     public void save(List<Entity> entities) {
-        for(Entity entity : entities)
-            save(entity);
+        entities.forEach(this::save);
     }
 
     public List<ArticleDTO> findByCategory(String category) {

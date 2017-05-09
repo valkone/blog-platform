@@ -100,8 +100,7 @@ public class EntityTests {
     }
 
     private Entity createTestEntity() {
-        Entity entity = new Entity();
-        entity.setId(UUID.randomUUID().getLeastSignificantBits());
-        return entity;
+        return (Entity) new Entity()
+                .setId(UUID.randomUUID().getLeastSignificantBits());
     }
 }
