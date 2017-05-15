@@ -1,6 +1,6 @@
 package com.valentin.blog.repositories.interfaces;
 
-import com.valentin.blog.models.Article;
+import com.valentin.blog.entities.Article;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.valentin.blog.repositories.interfaces;
 
-import com.valentin.blog.models.Entity;
+import com.valentin.blog.entities.Entity;
 import java.util.List;
 
 public interface EntityRepository<T extends Entity> {

@@ -1,7 +1,14 @@
-package com.valentin.blog.models;
+package com.valentin.blog.entities;
 
 public class Entity {
     private long id;
+
+    public Entity() {
+    }
+
+    public Entity(long id) {
+        this.setId(id);
+    }
 
     public long getId() {
         return id;

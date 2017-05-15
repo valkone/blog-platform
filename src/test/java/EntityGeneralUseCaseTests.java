@@ -1,7 +1,7 @@
 import com.valentin.blog.exceptions.CannotSaveEntityException;
-import com.valentin.blog.models.Entity;
-import com.valentin.blog.repositories.mocks.MockEntityRepository;
-import com.valentin.blog.services.EntityService;
+import com.valentin.blog.entities.Entity;
+import com.valentin.blog.repositories.mocks.MemoryEntityRepository;
+import com.valentin.blog.useCases.EntityGeneralUseCase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,45 +12,45 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
-public class EntityTests {
+public class EntityGeneralUseCaseTests {
 
-    private EntityService entityService;
+    private EntityGeneralUseCase entityGeneralUseCase;
     private Entity entity;
 
     @Before
     public void setUp() {
         // TODO: should this be outside?
-        entityService = new EntityService(new MockEntityRepository());
+        entityGeneralUseCase = new EntityGeneralUseCase(new MemoryEntityRepository());
         entity = createTestEntity();
     }
 
     @Test(expected = CannotSaveEntityException.class)
     public void saveNullEntity_shouldThrowException() {
-        entityService.save((Entity) null);
+        entityGeneralUseCase.save((Entity) null);
     }
 
     @Test
     public void saveEntity_shouldNotThrowException() {
-        entityService.save(entity);
+        entityGeneralUseCase.save(entity);
     }
 
     @Test
     public void saveEntity_shouldBeFound() {
-        entityService.save(entity);
-        Entity foundEntity = entityService.findById(entity.getId());
+        entityGeneralUseCase.save(entity);
+        Entity foundEntity = entityGeneralUseCase.findById(entity.getId());
         assertEquals(entity.getId(), foundEntity.getId());
     }
 
     @Test
     // TODO: should the service return null if the entity is not found?
     public void findEntitiesWithInvalidId_shouldReturnNull() {
-        Entity entity = entityService.findById(234234);
+        Entity entity = entityGeneralUseCase.findById(234234);
         assertEquals(null, entity);
     }
 
     @Test
     public void getAllEntitiesWithoutAdding_shouldReturnEmptyList() {
-        List<Entity> entities = entityService.getAll();
+        List<Entity> entities = entityGeneralUseCase.getAll();
         assertEquals(0, entities.size());
     }
 
@@ -58,18 +58,18 @@ public class EntityTests {
     public void getAllEntities_countShouldBeEqualsEntitiesCount() {
         int entitiesCount = 4;
         List<Entity> testEntities = getListOfTestEntities(entitiesCount);
-        entityService.save(testEntities);
+        entityGeneralUseCase.save(testEntities);
 
-        List<Entity> foundEntities = entityService.getAll();
+        List<Entity> foundEntities = entityGeneralUseCase.getAll();
         assertEquals(entitiesCount, foundEntities.size());
     }
 
     @Test
     public void getAllEntities_shouldReturnAllEntities() {
         List<Entity> testEntities = getListOfTestEntities(4);
-        entityService.save(testEntities);
+        entityGeneralUseCase.save(testEntities);
 
-        List<Entity> foundEntities = entityService.getAll();
+        List<Entity> foundEntities = entityGeneralUseCase.getAll();
         for(Entity testEntity : testEntities)
             assertTrue(entityFoundInDtoList(testEntity, foundEntities));
     }
@@ -78,9 +78,9 @@ public class EntityTests {
     public void getAllEntities_shouldNotReturnNotSavedEntities() {
         List<Entity> savedTestEntities = getListOfTestEntities(4);
         List<Entity> notSavedTestEntities = getListOfTestEntities(4);
-        entityService.save(savedTestEntities);
+        entityGeneralUseCase.save(savedTestEntities);
 
-        List<Entity> foundEntities = entityService.getAll();
+        List<Entity> foundEntities = entityGeneralUseCase.getAll();
         for(Entity testEntities : notSavedTestEntities)
             assertFalse(entityFoundInDtoList(testEntities, foundEntities));
     }
@@ -100,7 +100,6 @@ public class EntityTests {
     }
 
     private Entity createTestEntity() {
-        return (Entity) new Entity()
-                .setId(UUID.randomUUID().getLeastSignificantBits());
+        return new Entity(UUID.randomUUID().getLeastSignificantBits());
     }
 }

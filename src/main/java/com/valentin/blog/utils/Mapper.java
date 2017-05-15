@@ -2,8 +2,8 @@ package com.valentin.blog.utils;
 
 import com.valentin.blog.dtos.ArticleDTO;
 import com.valentin.blog.dtos.EntityDTO;
-import com.valentin.blog.models.Article;
-import com.valentin.blog.models.Entity;
+import com.valentin.blog.entities.Article;
+import com.valentin.blog.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.valentin.blog.models;
+package com.valentin.blog.entities;
 
 public class Category extends Entity {
     private String text;

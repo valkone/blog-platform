@@ -1,14 +1,14 @@
 package com.valentin.blog.repositories.mocks;
 
 import com.valentin.blog.exceptions.CannotSaveEntityException;
-import com.valentin.blog.models.Entity;
+import com.valentin.blog.entities.Entity;
 import com.valentin.blog.repositories.interfaces.EntityRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockEntityRepository<T extends Entity> implements EntityRepository<T> {
+public class MemoryEntityRepository<T extends Entity> implements EntityRepository<T> {
 
     private List<T> entities = new ArrayList<>();
 

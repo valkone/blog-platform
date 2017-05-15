@@ -1,4 +1,4 @@
-package com.valentin.blog.models;
+package com.valentin.blog.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +10,13 @@ public class Article extends Entity {
     private String title;
     private Date data;
     private List<Category> categories = new ArrayList<>();
+
+    public Article(){
+    }
+
+    public Article(long id) {
+        this.setId(id);
+    }
 
     public String getText() {
         return text;

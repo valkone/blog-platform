@@ -1,9 +1,9 @@
 import com.valentin.blog.dtos.ArticleDTO;
-import com.valentin.blog.models.Article;
-import com.valentin.blog.models.Category;
-import com.valentin.blog.repositories.mocks.MockArticleRepository;
-import com.valentin.blog.repositories.mocks.MockEntityRepository;
-import com.valentin.blog.services.ArticleService;
+import com.valentin.blog.entities.Article;
+import com.valentin.blog.entities.Category;
+import com.valentin.blog.repositories.mocks.MemoryArticleRepository;
+import com.valentin.blog.useCases.ArticleGeneralUseCase;
+import com.valentin.blog.useCases.PresentArticleUseCase;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,16 +11,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class ArticleTests {
+public class PresentArticleUseCaseTests {
 
-    private ArticleService articleService = new ArticleService(new MockArticleRepository());
+    private MemoryArticleRepository repo = new MemoryArticleRepository();
+    private PresentArticleUseCase articleService = new PresentArticleUseCase(repo);
+    private ArticleGeneralUseCase entityGeneralUseCase = new ArticleGeneralUseCase(repo);
 
     @Test
     public void getArticleByCategory_shouldReturnCorrectArticle() {
         Category category = getTestCategory();
         Article article = getTestArticle()
                 .setCategory(category);
-        articleService.save(article);
+        entityGeneralUseCase.save(article);
 
         List<ArticleDTO> foundArticle = articleService.findByCategory(category.getText());
         Assert.assertFalse(foundArticle.isEmpty());
@@ -34,8 +36,7 @@ public class ArticleTests {
     }
 
     private Article getTestArticle() {
-        return new Article()
-                .setData(new Date())
-                .setId(1);
+        return new Article(UUID.randomUUID().getLeastSignificantBits())
+                .setData(new Date());
     }
 }
