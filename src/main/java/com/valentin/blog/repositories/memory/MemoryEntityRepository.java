@@ -1,4 +1,4 @@
-package com.valentin.blog.repositories.mocks;
+package com.valentin.blog.repositories.memory;
 
 import com.valentin.blog.exceptions.CannotSaveEntityException;
 import com.valentin.blog.entities.Entity;

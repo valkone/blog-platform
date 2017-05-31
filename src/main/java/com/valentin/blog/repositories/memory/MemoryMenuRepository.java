@@ -1,4 +1,4 @@
-package com.valentin.blog.repositories.mocks;
+package com.valentin.blog.repositories.memory;
 
 import com.valentin.blog.entities.Menu;
 import com.valentin.blog.repositories.interfaces.MenuRepository;

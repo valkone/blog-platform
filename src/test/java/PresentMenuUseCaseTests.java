@@ -1,5 +1,5 @@
 import com.valentin.blog.entities.Menu;
-import com.valentin.blog.repositories.mocks.MemoryMenuRepository;
+import com.valentin.blog.repositories.memory.MemoryMenuRepository;
 import com.valentin.blog.useCases.MenuGeneralUseCase;
 import com.valentin.blog.useCases.PresentMenuUseCase;
 import org.junit.Assert;
@@ -17,20 +17,20 @@ public class PresentMenuUseCaseTests {
     @Before
     public void init() {
         MemoryMenuRepository repo = new MemoryMenuRepository();
-        this.presentMenuUseCase = new PresentMenuUseCase(repo);
-        this.menuGeneralUseCase = new MenuGeneralUseCase(repo);
+        presentMenuUseCase = new PresentMenuUseCase(repo);
+        menuGeneralUseCase = new MenuGeneralUseCase(repo);
     }
 
     @Test
     public void getMenu_shouldBeEmpty() {
-        List<Menu> menus = this.presentMenuUseCase.getAll();
+        List<Menu> menus = presentMenuUseCase.getAll();
         Assert.assertTrue(menus.isEmpty());
     }
 
     @Test
     public void addMenu_sizeShouldBeOne() {
-        this.menuGeneralUseCase.save(generateTestMenu());
-        List<Menu> menus = this.presentMenuUseCase.getAll();
+        menuGeneralUseCase.save(generateTestMenu());
+        List<Menu> menus = presentMenuUseCase.getAll();
         Assert.assertTrue(menus.size() == 1);
     }
 

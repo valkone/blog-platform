@@ -1,4 +1,4 @@
-package com.valentin.blog.repositories.mocks;
+package com.valentin.blog.repositories.memory;
 
 import com.valentin.blog.entities.Article;
 import com.valentin.blog.entities.Category;

@@ -1,8 +1,6 @@
 package com.valentin.blog.useCases;
 
-import com.valentin.blog.entities.Article;
 import com.valentin.blog.entities.Menu;
-import com.valentin.blog.repositories.interfaces.ArticleRepository;
 import com.valentin.blog.repositories.interfaces.MenuRepository;
 
 import java.util.List;

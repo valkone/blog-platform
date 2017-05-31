@@ -1,6 +1,6 @@
 import com.valentin.blog.exceptions.CannotSaveEntityException;
 import com.valentin.blog.entities.Entity;
-import com.valentin.blog.repositories.mocks.MemoryEntityRepository;
+import com.valentin.blog.repositories.memory.MemoryEntityRepository;
 import com.valentin.blog.useCases.EntityGeneralUseCase;
 import org.junit.Before;
 import org.junit.Test;

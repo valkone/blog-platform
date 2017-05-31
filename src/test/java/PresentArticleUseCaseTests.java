@@ -1,7 +1,7 @@
 import com.valentin.blog.dtos.ArticleDTO;
 import com.valentin.blog.entities.Article;
 import com.valentin.blog.entities.Category;
-import com.valentin.blog.repositories.mocks.MemoryArticleRepository;
+import com.valentin.blog.repositories.memory.MemoryArticleRepository;
 import com.valentin.blog.useCases.ArticleGeneralUseCase;
 import com.valentin.blog.useCases.PresentArticleUseCase;
 import org.junit.Assert;
